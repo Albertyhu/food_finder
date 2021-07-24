@@ -1,10 +1,11 @@
 import React from 'react';
 import {View, StyleSheet, Text, Button} from 'react-native';
 import {openDrawer} from '@react-navigation/drawer';
+
 export default function App({navigation}){
 return(
 <View style = {styles.container}>
-    <Text>Home</Text>
+    <Text>Profile</Text>
     <Button title = "Open Drawer" onPress = {() => {navigation.openDrawer()}} />
 </View>
 )
