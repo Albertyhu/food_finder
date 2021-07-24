@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React, {useState} from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createDrawerNavigator} from '@react-navigation/drawer';
@@ -13,15 +13,25 @@ import MainTab, {HomeStackScreen, AboutStackScreen, ProfileStackScreen, ExploreS
  ExploreTabScreen, AboutTabScreen, ProfileTabScreen,
  } from './screens/MainTab.js';
 import {MainDrawer} from './screens/MainDrawer.js';
+import RootScreen from './screens/RootNonMemberScreen.js';
 
 const Drawer = createDrawerNavigator();
 
 export default function App() {
+
+const [data, setData] = React.useState({
+    token: null,
+});
+
   return (
     <NavigationContainer>
-    <Drawer.Navigator drawerContent = {props => <MainDrawer {...props} />} >
-        <Drawer.Screen name = 'HomeDrawer' component = {MainTab} />
-    </Drawer.Navigator>
+    {data.token === null ?
+        <RootScreen />
+        :
+        <Drawer.Navigator drawerContent = {props => <MainDrawer {...props} />} >
+            <Drawer.Screen name = 'HomeDrawer' component = {MainTab} />
+        </Drawer.Navigator>
+    }
     </NavigationContainer>
   );
 }
