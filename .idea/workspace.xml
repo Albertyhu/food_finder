@@ -11,17 +11,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2f423ac5-8eea-49cf-8914-90bf126aa066" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/screens/AboutScreen.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/screens/EditProfile.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/screens/ExploreScreen.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/screens/MainDrawer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/screens/MainTab.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/screens/ProfileScreen.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/screens/HomeScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/HomeScreen.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/EditProfile.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/EditProfile.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
