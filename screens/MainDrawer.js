@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, StyleSheet, SafeAreaView} from 'react-native';
 import { DrawerItem, DrawerContentScrollView, createDrawerNavigator } from '@react-navigation/drawer';
 import {
@@ -11,7 +11,8 @@ Paragraph,
 Subheading,
 Text,
 Title,
-TouchableRipple
+TouchableRipple,
+useTheme,
 } from 'react-native-paper';
 
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -20,10 +21,15 @@ import Profile from './ProfileScreen.js';
 import About from './AboutScreen.js';
 import Explore from './ExploreScreen.js';
 import EditProfile from './EditProfile.js';
+import {AuthContext} from '../component/AuthContext.js';
 
 const Draw = createDrawerNavigator();
 
 export function MainDrawer (props) {
+
+const { signOut} = React.useContext(AuthContext);
+const { toggleTheme } = React.useContext(AuthContext);
+const PaperTheme = useTheme();
 
 return(
 <DrawerContentScrollView {...props}>
@@ -55,12 +61,12 @@ return(
     />
 </Drawer.Section>
 <Divider />
-<Drawer.Section>
+<Drawer.Section title = 'Preferences'>
     <View>
-        <TouchableRipple>
+        <TouchableRipple onPress = {toggleTheme}>
             <View style = {styles.switchContainer}>
                 <Text>Dark Theme</Text>
-                <Switch />
+                <Switch value = {PaperTheme.dark} />
             </View>
         </TouchableRipple>
     </View>
@@ -69,6 +75,7 @@ return(
 <Drawer.Section>
     <DrawerItem
         label = 'Sign Out'
+        onPress = {signOut}
         icon = {({color, size}) => <Icon name = 'exit-outline' size = {25} color = {color} />}
     />
 </Drawer.Section>

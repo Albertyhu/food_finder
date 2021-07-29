@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {View, StyleSheet, Text, Button, TextInput, Image, ImageBackground, TouchableOpacity,  } from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
 import * as Feather from 'react-native-feather';
@@ -6,9 +6,14 @@ import * as Animate from 'react-native-animatable';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {LinearGradient} from 'expo-linear-gradient';
 
+import { AuthContext } from'../component/AuthContext.js';
+import Users from '../model/users.js';
 import SignUp from './SignUpScreen.js';
 
 const SignIn = ({navigation}) =>{
+
+const { signIn } = React.useContext(AuthContext);
+
 const [data, setData] = React.useState({
     login: '',
     password: '',
@@ -28,6 +33,58 @@ const handlePass = pass =>{
     password: pass})
 }
 
+const handleSubmission = () =>{
+    if(data.login.length > 0 && data.password.length > 0){
+
+    /* ** Original method ** Note: The code didn't work because foundUser elements kept returning as undefined
+        const foundUser = Users.filter(val =>{
+            return((data.login === val.email || data.login === val.username) && data.password === val.password)
+        })
+        if(foundUser.length === 0){
+            alert("Error: Username or password is incorrect.");
+            return;
+        }
+        signIn(foundUser);
+        */
+
+        /*
+        if(foundUser.length > 0){
+            alert('username = ' + foundUser.username + '\n' +
+                    'email = ' + foundUser.email + '\n'
+            )
+            signIn(foundUser)
+        }
+        else{
+            alert('Login unsuccessful. Either username, email and/or password are invalid.')
+        }*/
+
+    let foundUser = false;
+        Users.map(val => {
+            if((data.login === val.username || data.login === val.email) && data.password === val.password){
+                signIn(val.username, val.email, val.password, val.userToken)
+                foundUser = true;
+            }
+        })
+    if(!foundUser){
+          alert('Login unsuccessful. Username, email and/or password are invalid.\n' +
+          'Login = ' + data.login + '\n' +
+          'Password = ' + data.password
+          )
+      }
+
+    }
+    else if(data.login.length === 0 && data.password.length > 0){
+        alert('Error: Username or email has not been written.')
+    }
+    else if(data.login.length > 0 && data.password.length === 0 ){
+        alert('Error: Password field is empty.')
+    }
+    else{
+        alert('Error: Both fields are empty. Please, write down your username/email and password to log in.')
+    }
+
+}
+
 const toggleSecure = () =>{
     setData(
         prevState =>({
@@ -36,6 +93,22 @@ const toggleSecure = () =>{
         })
     )
 }
+
+useEffect(()=>{
+    if(data.login.length > 0){
+        setData({
+            ...data,
+            isValid: true,
+        })
+    }
+    else{
+        setData({
+            ...data,
+            isValid: false,
+        })
+    }
+
+}, [data.login.length])
 
 return(
 <View style = {styles.container}>
@@ -61,6 +134,7 @@ return(
             onChangeText = {handleLoginInfo}
             style = {styles.TextInput}
             value = {data.login}
+            autoCapitalize = 'none'
             />
             {data.isValid ?
                 <Icon name = 'checkmark-circle-outline' size = {25} color = '#1BAC1E' style = {styles.icon} />
@@ -77,6 +151,7 @@ return(
             style = {styles.TextInput}
             value = {data.password}
             secureTextEntry= {data.securePassword}
+            autoCapitalize = 'none'
             />
             {data.securePassword ?
                 <Icon name = 'eye-off' size = {25} color = '#1BAC1E' style = {styles.icon} onPress = {toggleSecure}/>
@@ -84,7 +159,7 @@ return(
                <Icon name = 'eye' size = {25} color = '#B6B6B6' style = {styles.icon} onPress = {toggleSecure} />
             }
         </View>
-        <TouchableOpacity onPress = ''>
+        <TouchableOpacity onPress = {handleSubmission}>
             <LinearGradient colors = {['#23B525', '#156F16']} style = {styles.buttonContainer}>
                 <Text style = {styles.buttonText}>Sign In</Text>
                 <Icon name = 'chevron-forward-outline' size = {25} color = '#fff' style = {styles.icon}/>

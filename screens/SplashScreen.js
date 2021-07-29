@@ -1,9 +1,8 @@
 import React from 'react';
-import {View, StyleSheet, Text, Button, Image, ImageBackground, TouchableOpacity, ScrollView } from 'react-native';
+import {View, StyleSheet, Text, Button, Image, ImageBackground, TouchableOpacity, ScrollView} from 'react-native';
 import * as Animate from 'react-native-animatable';
 import {LinearGradient} from 'expo-linear-gradient';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-
 
 import SignIn from './SignInScreen.js';
 

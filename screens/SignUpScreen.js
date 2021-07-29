@@ -74,6 +74,7 @@ return(
        onChangeText = {handleEmail}
        style = {styles.TextInput}
        placeholder = 'Type your email here.'
+       autoCapitalize = 'none'
     />
     {data.isValid ?
         <Icon name = 'checkmark-circle-outline' size = {25} color = '#1BAC1E' style = {styles.icon} />
@@ -90,6 +91,7 @@ return(
       onChangeText = {handleUsername}
       style = {styles.TextInput}
       placeholder = 'Type your username here. It has to be at least four characters long.'
+      autoCapitalize = 'none'
    />
    {data.isValid ?
        <Icon name = 'checkmark-circle-outline' size = {25} color = '#1BAC1E' style = {styles.icon} />
@@ -107,6 +109,7 @@ return(
         style = {styles.TextInput}
         placeholder = 'Type your password here.'
         secureTextEntry = {data.securePassEntry}
+        autoCapitalize = 'none'
      />
      {data.securePassEntry ?
          <Icon name = 'eye-off' size = {25} color = '#1BAC1E' style = {styles.icon} onPress = {toggleSecure} />
@@ -124,6 +127,7 @@ return(
       style = {styles.TextInput}
       placeholder = 'Type your password here again for confirmation.'
       secureTextEntry = {data.securePassEntry}
+      autoCapitalize = 'none'
    />
    {data.isValid ?
        <Icon name = 'checkmark-circle-outline' size = {25} color = '#1BAC1E' style = {styles.icon} />
