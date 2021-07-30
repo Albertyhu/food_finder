@@ -4,7 +4,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import Icon from 'react-native-vector-icons/Ionicons';
 import * as Animate from 'react-native-animatable';
 import {LinearGradient} from 'expo-linear-gradient';
-import { useTheme as useNavTheme } from '@react-navigation/native';
+import { useTheme as useNavTheme} from '@react-navigation/native';
 
 const SignUp = ({navigation}) =>{
 

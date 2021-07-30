@@ -22,12 +22,8 @@
     <list default="true" id="7cbc873d-819f-44b9-bd3d-336ad8104fcb" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/screens/MainDrawer.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/MainDrawer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/screens/MainTab.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/MainTab.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/screens/RootNonMemberScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/RootNonMemberScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/screens/SignInScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/SignInScreen.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/screens/SignUpScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/SignUpScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/screens/SplashScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/SplashScreen.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
