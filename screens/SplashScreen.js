@@ -28,11 +28,11 @@ return(
         >
         <Text style = {styles.title}>Food Finder</Text>
         <Text style = {styles.subtitle}>Geographical solutions to solve your hunger problems.</Text>
-        <LinearGradient style = {[styles.button, {borderWidth: colors.borderWidth, borderColor: colors.borderColor, }]} colors = {colors.linearButton}>
+        <LinearGradient style = {styles.button} colors = {colors.splashLinear}>
             <TouchableOpacity onPress = {() => navigation.navigate('SignIn')}>
-                <View style = {{flexDirection: 'row', alignItems: 'center', justifyContent: 'center',}}>
-                    <Text style = {[styles.buttonText, {color: colors.buttonText}]}>Get Started</Text>
-                    <MaterialIcons name = 'keyboard-arrow-right' color = {colors.iconColor} style = {{padding: 5,}}/>
+                <View style = {{flexDirection: 'row', alignItems: 'center', justifyContent: 'center', margin: 5,}}>
+                    <Text style = {[styles.buttonText, {color: colors.secondaryButtonText}]}>Get Started</Text>
+                    <MaterialIcons name = 'keyboard-arrow-right' color = {colors.secondaryIcon} style = {{padding: 5,}}/>
                 </View>
             </TouchableOpacity>
         </LinearGradient>
@@ -46,13 +46,15 @@ export default Splash;
 const styles = StyleSheet.create({
 button:{
     flexDirection: 'row',
-    borderRadius: 15,
+    borderRadius: 25,
+    justifyContent: 'space-between',
 
 },
 buttonText:{
     color: '#fff',
-    paddingVertical: 5,
+    paddingVertical: 10,
     paddingLeft: 10,
+    fontWeight: 'bold',
 },
 container: {
     flex: 1,

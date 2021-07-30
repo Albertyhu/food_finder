@@ -40,6 +40,7 @@ const CustomDefaultTheme = {
        secondaryButtonBackgroundColor: '#fff',
        secondaryButtonText: '#000',
        secondaryIcon: '#000',
+       splashLinear: ['#23B525','#1B861D'],
     },
 }
 
@@ -68,10 +69,11 @@ const CustomDarkTheme = {
         secondaryButtonBackgroundColor: '#333',
         secondaryButtonText: '#fff',
         secondaryIcon: '#fff',
+        splashLinear: ['#000', '#000'],
     },
 }
 
-const [theme, setTheme] = React.useState(true);
+const [theme, setTheme] = React.useState(false);
 let currentTheme = theme ? CustomDefaultTheme : CustomDarkTheme;
 
 const initialLogin = {
