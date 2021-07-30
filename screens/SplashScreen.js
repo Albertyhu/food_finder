@@ -31,8 +31,8 @@ return(
         <LinearGradient style = {styles.button} colors = {colors.splashLinear}>
             <TouchableOpacity onPress = {() => navigation.navigate('SignIn')}>
                 <View style = {{flexDirection: 'row', alignItems: 'center', justifyContent: 'center', margin: 5,}}>
-                    <Text style = {[styles.buttonText, {color: colors.secondaryButtonText}]}>Get Started</Text>
-                    <MaterialIcons name = 'keyboard-arrow-right' color = {colors.secondaryIcon} style = {{padding: 5,}}/>
+                    <Text style = {[styles.buttonText]}>Get Started</Text>
+                    <MaterialIcons name = 'keyboard-arrow-right' color = '#fff' style = {{padding: 5,}} size = {25} />
                 </View>
             </TouchableOpacity>
         </LinearGradient>

@@ -73,7 +73,7 @@ const CustomDarkTheme = {
     },
 }
 
-const [theme, setTheme] = React.useState(false);
+const [theme, setTheme] = React.useState(true);
 let currentTheme = theme ? CustomDefaultTheme : CustomDarkTheme;
 
 const initialLogin = {
