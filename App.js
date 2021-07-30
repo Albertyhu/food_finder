@@ -22,30 +22,57 @@ const Drawer = createDrawerNavigator();
 
 export default function App() {
 
-const CustomDefaultTheme = ({
+const CustomDefaultTheme = {
     ...NavDefaultTheme,
     ...PaperDefaultTheme,
     colors:{
        ...NavDefaultTheme.colors,
        ...PaperDefaultTheme.colors,
+       homeTab: '#33DDFF',
+       homeIconBackground: '#33DDFF',
+       drawerText: '#000',
+       backgroundColor: '#23B525',
+       linearButton: ['#23B525','#1B861D'],
+       buttonText: '#fff',
+       borderWidth: 0,
+       borderRadius: 15,
+       iconColor: '#fff',
+       secondaryButtonBackgroundColor: '#fff',
+       secondaryButtonText: '#000',
+       secondaryIcon: '#000',
     },
-})
+}
 
-const CustomDarkTheme = ({
+const CustomDarkTheme = {
     ...NavDarkTheme,
     ...PaperDarkTheme,
     colors:{
         ...NavDarkTheme.colors,
         ...PaperDarkTheme.colors,
-        tabBarColor: '#000',
+        tabBarColor: '#fff',
+        homeTab: '#fff',
         text: "#fff",
         iconActive: '#fff',
         iconInactive: 'ABABAB',
+        stackBarColor: '#333',
+        homeIconBackground: '#333',
+        drawerBackgroundcolor: '#fff',
+        drawerText: '#000',
+        backgroundColor: '#333',
+        linearButton: ['#fff','#fff'],
+        buttonText: '#000',
+        borderWidth: 1,
+        borderColor: '#000',
+        borderRadius: 15,
+        iconColor: '#000',
+        secondaryButtonBackgroundColor: '#333',
+        secondaryButtonText: '#fff',
+        secondaryIcon: '#fff',
     },
-})
+}
 
-const [theme, setTheme] = React.useState(true);
-let currentTheme;
+const [theme, setTheme] = React.useState(false);
+let currentTheme = theme ? CustomDefaultTheme : CustomDarkTheme;
 
 const initialLogin = {
     token: null,
@@ -114,7 +141,7 @@ createAccount: async (user, email, password) =>{
     setData({type: 'REGISTER', token: userToken, id: user, mail: email, pass: password})
 },
 toggleTheme: () =>{
-    setTheme(!theme)
+    setTheme(theme => !theme)
 },
 }), []);
 
@@ -132,10 +159,6 @@ useEffect(()=>{
     }, 1000)
 
 },[])
-
-useEffect(() =>{
-    currentTheme = theme ? CustomDefaultTheme : CustomDarkTheme;
-}, [theme])
 
 return (
 <PaperProvider theme = {currentTheme}>

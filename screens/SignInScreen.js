@@ -5,6 +5,8 @@ import * as Feather from 'react-native-feather';
 import * as Animate from 'react-native-animatable';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {LinearGradient} from 'expo-linear-gradient';
+import {useTheme as useNavTheme } from '@react-navigation/native';
+import { useTheme as PaperTheme} from 'react-native-paper';
 
 import { AuthContext } from'../component/AuthContext.js';
 import Users from '../model/users.js';
@@ -13,6 +15,7 @@ import SignUp from './SignUpScreen.js';
 const SignIn = ({navigation}) =>{
 
 const { signIn } = React.useContext(AuthContext);
+const { colors } = useNavTheme();
 
 const [data, setData] = React.useState({
     login: '',
@@ -111,7 +114,7 @@ useEffect(()=>{
 }, [data.login.length])
 
 return(
-<View style = {styles.container}>
+<View style = {[styles.container, {backgroundColor: colors.backgroundColor,}]}>
     <View style = {styles.head}>
         <Animate.Image
             source = {require('../assets/logo.png')}
@@ -160,18 +163,26 @@ return(
             }
         </View>
         <TouchableOpacity onPress = {handleSubmission}>
-            <LinearGradient colors = {['#23B525', '#156F16']} style = {styles.buttonContainer}>
-                <Text style = {styles.buttonText}>Sign In</Text>
-                <Icon name = 'chevron-forward-outline' size = {25} color = '#fff' style = {styles.icon}/>
+            <LinearGradient
+            colors = {colors.linearButton}
+            style = {[styles.buttonContainer,
+            {borderWidth: colors.borderWidth,
+            borderColor: colors.borderColor,}]}>
+                <Text style = {[styles.buttonText, {color: colors.buttonText}]}>Sign In</Text>
+                <Icon name = 'chevron-forward-outline' size = {25} color = {colors.iconColor} style = {styles.icon}/>
             </LinearGradient>
         </TouchableOpacity>
         <View>
             <Text style = {{paddingVertical: 10, fontWeight: 'bold'}}>Don't have an account?</Text>
         </View>
         <TouchableOpacity onPress = {()=>navigation.navigate('SignUp')}
-            style = {[styles.buttonContainer, {borderColor: '#000', borderWidth: 1}]}>
-                <Text style = {styles.signUpButtonText}>Sign Up</Text>
-                <Icon name = 'chevron-forward-outline' size = {25} color = '#000' style = {styles.icon}/>
+            style = {[styles.buttonContainer,
+            {borderColor: '#000',
+            borderWidth: 1,
+            backgroundColor: colors.secondaryButtonBackgroundColor,
+            }]}>
+                <Text style = {[styles.signUpButtonText, {color: colors.secondaryButtonText,}]}>Sign Up</Text>
+                <Icon name = 'chevron-forward-outline' size = {25} color = {colors.secondaryIcon} style = {styles.icon}/>
         </TouchableOpacity>
     </Animate.View>
 </View>

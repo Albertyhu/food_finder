@@ -13,15 +13,17 @@ return(
     <Root.Navigator screenOptions = {{
         headerShown: false,
     }}>
-        <Root.Screen name = 'Splash' component = {Splash} options = {{
-            title: 'Welcome'
-        }}/>
         <Root.Screen name = 'SignUp' component = {SignUp} options = {{
-            title: 'Sign Out'
-        }}/>
+                title: 'Sign Out'
+            }}/>
         <Root.Screen name = 'SignIn' component = {SignIn} options = {{
             title: 'Sign In'
         }}/>
+        <Root.Screen name = 'Splash' component = {Splash} options = {{
+            title: 'Welcome'
+        }}/>
+
+
 
     </Root.Navigator>
 )

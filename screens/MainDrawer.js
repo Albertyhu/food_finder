@@ -30,43 +30,45 @@ export function MainDrawer (props) {
 const { signOut} = React.useContext(AuthContext);
 const { toggleTheme } = React.useContext(AuthContext);
 const PaperTheme = useTheme();
+const {colors} = useTheme()
 
 return(
-<DrawerContentScrollView {...props}>
+<DrawerContentScrollView {...props} style = {{backgroundColor: colors.drawerBackgroundcolor, color: colors.drawerText }}>
 <Drawer.Section>
     <DrawerItem
-        label = 'Home'
+        label = {({focused, color }) => <Text style = {{color: '#000' }}>Home</Text> }
         onPress = {() => props.navigation.navigate('Home')}
-        icon = {({color, size}) => <Icon name = 'home-outline' color = {color} size = {size} />}
+        icon = {({color, size}) => <Icon name = 'home-outline' color = '#000' size = {size} />}
     />
     <DrawerItem
-        label = 'About'
+        label = {({focused, color }) => <Text style = {{color: '#000' }}>About</Text> }
         onPress = {() => props.navigation.navigate('About')}
-        icon = {({color, size}) => <Icon name = 'albums-outline' color = {color} size = {size} />}
+        icon = {({color, size}) => <Icon name = 'albums-outline' color = '#000' size = {size} />}
     />
     <DrawerItem
-        label = 'Profile'
+        label = {({focused, color }) => <Text style = {{color: '#000' }}>Profile</Text> }
         onPress = {() => props.navigation.navigate('Profile')}
-        icon = {({color, size}) => <Icon name = 'ios-person' color = {color} size = {size} />}
+        icon = {({color, size}) => <Icon name = 'ios-person' color = '#000' size = {size} />}
     />
     <DrawerItem
-        label = 'Explore'
+        label = {({focused, color }) => <Text style = {{color: '#000' }}>Explore</Text> }
         onPress = {() => props.navigation.navigate('Explore')}
-        icon = {({color, size}) => <Icon name = 'map-outline' color = {color} size = {size} />}
+        icon = {({color, size}) => <Icon name = 'map-outline' color = '#000' size = {size} />}
     />
     <DrawerItem
-        label = 'Edit Profile'
+        label = {({focused, color }) => <Text style = {{color: '#000' }}>Edit</Text> }
         onPress = {() => props.navigation.navigate('EditProfile')}
-        icon = {({color, size}) => <Icon name = 'pencil-outline' color = {color} size = {size} />}
+        icon = {({color, size}) => <Icon name = 'pencil-outline' color = '#000' size = {size} />}
     />
 </Drawer.Section>
-<Divider />
-<Drawer.Section title = 'Preferences'>
+<Divider/>
+<Drawer.Section>
     <View>
+        <Text style = {{color: colors.drawerText, marginLeft: 15, marginTop: 15, fontWeight: 'bold', }}>Preferences</Text>
         <TouchableRipple onPress = {toggleTheme}>
             <View style = {styles.switchContainer}>
-                <Text>Dark Theme</Text>
-                <Switch value = {PaperTheme.dark} />
+                <Text style = {{color: '#000'}}>Dark Theme</Text>
+                <Switch value = {PaperTheme.dark} onValueChange = {toggleTheme} />
             </View>
         </TouchableRipple>
     </View>
@@ -74,9 +76,9 @@ return(
 <Divider />
 <Drawer.Section>
     <DrawerItem
-        label = 'Sign Out'
+        label = {({focused, color }) => <Text style = {{color: '#000' }}>Sign Out</Text> }
         onPress = {signOut}
-        icon = {({color, size}) => <Icon name = 'exit-outline' size = {25} color = {color} />}
+        icon = {({color, size}) => <Icon name = 'exit-outline' size = {25} color = '#000' />}
     />
 </Drawer.Section>
 </DrawerContentScrollView>

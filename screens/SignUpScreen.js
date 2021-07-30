@@ -4,8 +4,12 @@ import {createStackNavigator} from '@react-navigation/stack';
 import Icon from 'react-native-vector-icons/Ionicons';
 import * as Animate from 'react-native-animatable';
 import {LinearGradient} from 'expo-linear-gradient';
+import { useTheme as useNavTheme } from '@react-navigation/native';
 
 const SignUp = ({navigation}) =>{
+
+const { colors } = useNavTheme();
+
 const [data, setData] = React.useState({
     username: '',
     email: '',
@@ -51,7 +55,7 @@ const toggleSecure = () =>{
 
 
 return(
-<View style = {styles.container}>
+<View style = {[styles.container, {backgroundColor: colors.backgroundColor}]}>
 <View style = {styles.head}>
 {/*
     <Animate.Image
@@ -136,17 +140,26 @@ return(
    }
   </View>
   <TouchableOpacity onPress = '' >
-    <LinearGradient colors = {['#23B525', '#156F16']} style = {styles.buttonContainer}>
-        <Text style = {styles.buttonText}>Sign Up</Text>
-        <Icon name = 'chevron-forward-outline' style = {styles.icon} size = {25} color = "#fff"/>
+    <LinearGradient colors = {colors.linearButton}
+        style = {[styles.buttonContainer, {
+            borderWidth: colors.borderWidth,
+            borderColor: colors.borderColor,
+            backgroundColor: colors.backgroundColor,
+            }]}>
+        <Text style = {[styles.buttonText, {color: colors.buttonText}]}>Sign Up</Text>
+        <Icon name = 'chevron-forward-outline' style = {styles.icon} size = {25} color = {colors.iconColor}/>
     </LinearGradient>
   </TouchableOpacity>
   <View style = {{alignItems: 'center', marginVertical: 10,}}>
     <Text style = {{fontWeight: 'bold'}}>Don't have an account?</Text>
   </View>
-    <TouchableOpacity onPress = {() => navigation.goBack()} style = {styles.signInButton}>
-          <Text style = {styles.signInButtonText}>Sign In</Text>
-          <Icon name = 'chevron-forward-outline' style = {styles.icon} size = {25} color = "#000"/>
+    <TouchableOpacity onPress = {() => navigation.goBack()}
+    style = {[styles.signInButton, {
+        backgroundColor: colors.secondaryButtonBackgroundColor,
+
+    }]}>
+          <Text style = {[styles.signInButtonText, {color: colors.secondaryButtonText}]}>Sign In</Text>
+          <Icon name = 'chevron-forward-outline' style = {styles.icon} size = {25} color = {colors.secondaryIcon}/>
     </TouchableOpacity>
 </Animate.View>
 </View>

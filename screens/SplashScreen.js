@@ -3,12 +3,16 @@ import {View, StyleSheet, Text, Button, Image, ImageBackground, TouchableOpacity
 import * as Animate from 'react-native-animatable';
 import {LinearGradient} from 'expo-linear-gradient';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { useTheme as useNavTheme } from '@react-navigation/native';
+
 
 import SignIn from './SignInScreen.js';
 
 const Splash = ({navigation}) =>{
+const {colors} = useNavTheme();
+
 return(
-<View style = {styles.container}>
+<View style = {[styles.container, {backgroundColor: colors.backgroundColor}]}>
     <View style = {styles.header}>
          <Animate.Image
          source = {require('../assets/logo.png')}
@@ -24,11 +28,11 @@ return(
         >
         <Text style = {styles.title}>Food Finder</Text>
         <Text style = {styles.subtitle}>Geographical solutions to solve your hunger problems.</Text>
-        <LinearGradient style = {styles.button} colors = {['#23B525','#1B861D']}>
+        <LinearGradient style = {[styles.button, {borderWidth: colors.borderWidth, borderColor: colors.borderColor, }]} colors = {colors.linearButton}>
             <TouchableOpacity onPress = {() => navigation.navigate('SignIn')}>
                 <View style = {{flexDirection: 'row', alignItems: 'center', justifyContent: 'center',}}>
-                    <Text style = {styles.buttonText}>Get Started</Text>
-                    <MaterialIcons name = 'keyboard-arrow-right' color = '#fff' style = {{padding: 5,}}/>
+                    <Text style = {[styles.buttonText, {color: colors.buttonText}]}>Get Started</Text>
+                    <MaterialIcons name = 'keyboard-arrow-right' color = {colors.iconColor} style = {{padding: 5,}}/>
                 </View>
             </TouchableOpacity>
         </LinearGradient>
