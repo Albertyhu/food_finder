@@ -1,14 +1,15 @@
 import React, {useEffect} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity, Image, ImageBackground, SafeAreaView, ScrollView, TextInput} from 'react-native';
 import BottomSheet from 'reanimated-bottom-sheet';
-import * as Animated from 'react-native-animatable';
 import Constants from 'expo-constants';
 import * as ImagePicker from 'expo-image-picker';
+import Animated, {useSharedValue,useAnimatedStyle, withSpring} from 'react-native-reanimated';
 
 const EditProfile = () =>{
 
 const [image, setImage] = React.useState('https://png.pngtree.com/png-vector/20191101/ourmid/pngtree-male-avatar-simple-cartoon-design-png-image_1934458.jpg')
 const [ openPosition, setPos ] = React.useState(false)
+const [blur, setBlur ] = React.useState(false);
 const [data, setData] = React.useState({
     userName: '',
     email: '',
@@ -53,6 +54,8 @@ const handleCountry = val =>{
 }
 
 let ref = React.createRef(null);
+const fall = useSharedValue(0);
+
 const renderContent = () =>(
     <View style = {styles.panel}>
         <TouchableOpacity style = {styles.button} onPress = {openLibrary} >
@@ -89,13 +92,31 @@ const toggleBottomSheet = () =>{
     setPos(openPosition => !openPosition)
 }
 
+/*Code for blurring the background when bottom sheet is up*/
+let onBlur = useSharedValue(false)
+
+const blurBackground = () =>{
+    onBlur.value = true;
+}
+
+const sharpenBackground = () =>{
+    onBlur.value = false;
+}
+
+const opacityChange = useAnimatedStyle(()=>{
+return{
+    opacity: withSpring(onBlur.value ? 0.3 : 1.0)
+}
+})
 
 useEffect(()=>{
     if(openPosition){
         ref.current.snapTo(0);
+        setBlur(true)
     }
     else{
         ref.current.snapTo(1);
+        setBlur(false)
     }
 }, [openPosition])
 
@@ -116,6 +137,7 @@ if(!result.cancelled){
 else{
     closeBSheet;
 }
+    /*this part is necessary because the app tends to lose track of the DOM after the photo library opens*/
 ref = currRef;
 }
 
@@ -134,6 +156,7 @@ if(!result.cancelled){
 else{
     closeBSheet;
 }
+    /*this part is necessary because the app tends to lose track of the DOM after the device's camera opens*/
 ref = currRef;
 }
 
@@ -148,10 +171,11 @@ return(
     enableGestureInteraction = {true}
     enabledContentGestureInteraction={false}
     style = {{paddingBottom: 250}}
-    onOpenEnd = {openBSheet}
-    onCloseEnd = {closeBSheet}
+    onOpenEnd = {openBSheet, blurBackground}
+    onCloseEnd = {closeBSheet, sharpenBackground}
+
 />
-<Animated.View>
+<Animated.View style={opacityChange}>
 <ScrollView>
 <View style={styles.profileContainer}>
     <ImageBackground
@@ -289,8 +313,8 @@ panel:{
     backgroundColor: '#fff',
     alignItems: 'center',
     width: '100%',
-    height: 450,
     borderBottomWidth: 1,
+    marginBottom: 100,
 },
 profileContainer:{
     alignItems: 'center',
