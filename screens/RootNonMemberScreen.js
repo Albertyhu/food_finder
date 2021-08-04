@@ -5,6 +5,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import SignIn from './SignInScreen.js';
 import SignUp from './SignUpScreen.js';
 import Splash from './SplashScreen.js';
+import EditProfile from './EditProfile.js';
 
 const Root = createStackNavigator();
 
@@ -13,6 +14,9 @@ return(
     <Root.Navigator screenOptions = {{
         headerShown: false,
     }}>
+        <Root.Screen name = 'EditProfile' component = {EditProfile} options = {{
+            title: 'Edit Profile'
+        }}/>
         <Root.Screen name = 'Splash' component = {Splash} options = {{
             title: 'Welcome'
         }}/>
