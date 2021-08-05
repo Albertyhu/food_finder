@@ -78,7 +78,7 @@ const [theme, setTheme] = React.useState(true);
 let currentTheme = theme ? CustomDefaultTheme : CustomDarkTheme;
 
 const initialLogin = {
-    token: null,
+    token: 'asdf',
     username: '',
     email: '',
     password: '',
