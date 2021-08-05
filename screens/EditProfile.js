@@ -4,6 +4,8 @@ import BottomSheet from 'reanimated-bottom-sheet';
 import Constants from 'expo-constants';
 import * as ImagePicker from 'expo-image-picker';
 import Animated, {useSharedValue,useAnimatedStyle, withSpring} from 'react-native-reanimated';
+import {useTheme as useNavTheme} from '@react-navigation/native';
+import {openDrawer} from '@react-navigation/drawer';
 
 const EditProfile = () =>{
 
@@ -80,6 +82,11 @@ const renderHeader = () =>(
     </View>
 )
 
+const renderBackground = () =>({
+backgroundColor: '#fff',
+position: 'absolute',
+})
+
 const openBSheet = () =>{
     setPos(true);
 }
@@ -105,7 +112,7 @@ const sharpenBackground = () =>{
 
 const opacityChange = useAnimatedStyle(()=>{
 return{
-    opacity: withSpring(onBlur.value ? 0.3 : 1.0)
+    opacity: withSpring(onBlur.value ? 0.1 : 1.0)
 }
 })
 
@@ -170,12 +177,12 @@ return(
     initialSnap = {1}
     enableGestureInteraction = {true}
     enabledContentGestureInteraction={false}
-    style = {{paddingBottom: 250}}
     onOpenEnd = {openBSheet, blurBackground}
     onCloseEnd = {closeBSheet, sharpenBackground}
-
+    renderBackground = {renderBackground}
 />
-<Animated.View style={opacityChange}>
+{/*<Animated.View style={opacityChange}>*/}
+<Animated.View>
 <ScrollView>
 <View style={styles.profileContainer}>
     <ImageBackground
@@ -310,7 +317,7 @@ inputContainer:{
 },
 
 panel:{
-    backgroundColor: '#fff',
+    backgroundColor: '#ffffff',
     alignItems: 'center',
     width: '100%',
     borderBottomWidth: 1,

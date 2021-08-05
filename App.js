@@ -17,6 +17,7 @@ import {MainDrawer} from './screens/MainDrawer.js';
 import RootScreen from './screens/RootNonMemberScreen.js';
 import {generateToken} from './screens/TokenGenerator.js';
 import {AuthContext} from './component/AuthContext.js';
+import EditProfile from './screens/EditProfile.js';
 
 const Drawer = createDrawerNavigator();
 
@@ -169,6 +170,7 @@ return (
     {data.token !== null ?
         <Drawer.Navigator drawerContent = {props => <MainDrawer {...props} />} >
             <Drawer.Screen name = 'HomeDrawer' component = {MainTab} />
+            <Drawer.Screen name = 'EditProfile' component = {EditProfile} />
         </Drawer.Navigator>
         :
         <RootScreen />

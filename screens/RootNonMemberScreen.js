@@ -14,9 +14,9 @@ return(
     <Root.Navigator screenOptions = {{
         headerShown: false,
     }}>
-        <Root.Screen name = 'EditProfile' component = {EditProfile} options = {{
+       {/* <Root.Screen name = 'EditProfile' component = {EditProfile} options = {{
             title: 'Edit Profile'
-        }}/>
+        }}/> */}
         <Root.Screen name = 'Splash' component = {Splash} options = {{
             title: 'Welcome'
         }}/>
