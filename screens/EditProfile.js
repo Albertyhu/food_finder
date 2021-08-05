@@ -6,9 +6,10 @@ import * as ImagePicker from 'expo-image-picker';
 import Animated, {useSharedValue,useAnimatedStyle, withSpring} from 'react-native-reanimated';
 import {useTheme as useNavTheme} from '@react-navigation/native';
 import {openDrawer} from '@react-navigation/drawer';
+import {useTheme as usePaperTheme} from 'react-native-paper';
 
 const EditProfile = () =>{
-
+const {colors} = useNavTheme();
 const [image, setImage] = React.useState('https://png.pngtree.com/png-vector/20191101/ourmid/pngtree-male-avatar-simple-cartoon-design-png-image_1934458.jpg')
 const [ openPosition, setPos ] = React.useState(false)
 const [blur, setBlur ] = React.useState(false);
@@ -168,7 +169,7 @@ ref = currRef;
 }
 
 return(
-<SafeAreaView style = {styles.container}>
+<SafeAreaView style = {[styles.container, {backgroundColor: colors.editPageBackgroundColor, }]}>
 <BottomSheet
     ref = {ref}
     snapPoints = {['40%', '5%']}
@@ -181,37 +182,36 @@ return(
     onCloseEnd = {closeBSheet, sharpenBackground}
     renderBackground = {renderBackground}
 />
-{/*<Animated.View style={opacityChange}>*/}
-<Animated.View>
+<Animated.View style={opacityChange}>
 <ScrollView>
 <View style={styles.profileContainer}>
     <ImageBackground
         source={{uri: image}}
         style = {styles.profilePic}>
         <TouchableOpacity onPress = {toggleBottomSheet}>
-        <Image source = {require('../assets/white_camera_icon.png')} color = '#FFF' size = {50} />
+        <Image source = {require('../assets/white_camera_icon.png')} color = {cameraIconColor()} size = {50} />
         </TouchableOpacity>
      </ImageBackground>
 </View>
 <View style = {{alignItems: 'center', }}>
-    <Text style = {styles.title}>Edit your profile</Text>
-    <Text style = {styles.subtitle}>Edit your personal information here. If you don't want to change certain information, leave the corresponding field blank.</Text>
+    <Text style = {[styles.title, {color: colors.text} ]}>Edit your profile</Text>
+    <Text style = {[styles.subtitle, {color: colors.subtitle}]}>Edit your personal information here. If you don't want to change certain information, leave the corresponding field blank.</Text>
 </View>
 <View style = {{alignItems: 'center'}}>
 {/* username */}
 <View style = {styles.inputContainer}>
-<Text style = {styles.fieldTitle}>Username</Text>
+<Text style = {[styles.fieldTitle, {color: colors.text}] }>Username</Text>
 <TextInput
     value = {data.userName}
     onChangeText = {handleUsername}
     placeholder='Type your username here'
-    style = {styles.textInput}
+    style = {[styles.textInput, {color: colors.text}] }
 />
 </View>
 
 {/* email */}
 <View style = {styles.inputContainer}>
-<Text style = {styles.fieldTitle}>Email</Text>
+<Text style = {[styles.fieldTitle, {color: colors.text}] }>Email</Text>
 <TextInput
     value = {data.email}
     onChangeText = {handleEmail}
@@ -222,7 +222,7 @@ return(
 
 {/* password */}
 <View style = {styles.inputContainer}>
-<Text style = {styles.fieldTitle}>Password</Text>
+<Text style = {[styles.fieldTitle, {color: colors.text}] }>Password</Text>
 <TextInput
     value = {data.password}
     onChangeText = {handlePassword}
@@ -233,7 +233,7 @@ return(
 
 {/* Confirm Password */}
 <View style = {styles.inputContainer}>
-<Text style = {styles.fieldTitle}>Confirm your password</Text>
+<Text style = {[styles.fieldTitle, {color: colors.text}] }>Confirm your password</Text>
 <TextInput
     value = {data.confirmPass}
     onChangeText = {handleConfirmPass}
@@ -244,7 +244,7 @@ return(
 
 {/* country */}
 <View style = {styles.inputContainer}>
-<Text style = {styles.fieldTitle}>Country</Text>
+<Text style = {[styles.fieldTitle, {color: colors.text}] }>Country</Text>
 <TextInput
     value = {data.country}
     onChangeText = {handleCountry}
@@ -267,8 +267,12 @@ return(
 
 export default EditProfile;
 
-const styles = StyleSheet.create({
+const cameraIconColor = () => {
+    const PaperTheme = usePaperTheme();
+    return PaperTheme.dark ? '#000' : '#fff';
+}
 
+const styles = StyleSheet.create({
 button:{
     backgroundColor: '#F76900',
     borderRadius: 15,
@@ -346,6 +350,7 @@ textInput:{
     padding: 5,
     width: '100%',
     borderWidth: 1,
-    borderColor: '#9B9B9B'
+    borderColor: '#9B9B9B',
+    borderColor: '#9B9B9B',
 },
 })

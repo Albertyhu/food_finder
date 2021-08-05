@@ -1,10 +1,13 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useMemo, useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import {NavigationContainer, DefaultTheme as NavDefaultTheme, DarkTheme as NavDarkTheme} from '@react-navigation/native';
-import {createDrawerNavigator} from '@react-navigation/drawer';
+import {NavigationContainer, DefaultTheme as NavDefaultTheme, DarkTheme as NavDarkTheme, useTheme as useNavTheme} from '@react-navigation/native';
+import {createDrawerNavigator, openDrawer} from '@react-navigation/drawer';
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { DarkTheme as PaperDarkTheme, DefaultTheme as PaperDefaultTheme, Provider as PaperProvider} from 'react-native-paper';
+import {createStackNavigator} from '@react-navigation/stack';
+import Icon from 'react-native-vector-icons/Ionicons';
+
 
 import Home from './screens/HomeScreen.js';
 import About from './screens/AboutScreen.js';
@@ -42,6 +45,10 @@ const CustomDefaultTheme = {
        secondaryButtonText: '#000',
        secondaryIcon: '#000',
        splashLinear: ['#23B525','#1B861D'],
+       editPageBackgroundColor: '#fff',
+       editBurger: '#000',
+       editBurgerBackground: '#fff',
+       subtitle: '#9B9B9B',
     },
 }
 
@@ -71,6 +78,10 @@ const CustomDarkTheme = {
         secondaryButtonText: '#fff',
         secondaryIcon: '#fff',
         splashLinear: ['#000', '#000'],
+        editPageBackgroundColor: '#333333',
+        editBurger: '#fff',
+       editBurgerBackground: '#000',
+       subtitle: '#fff',
     },
 }
 
@@ -78,7 +89,7 @@ const [theme, setTheme] = React.useState(true);
 let currentTheme = theme ? CustomDefaultTheme : CustomDarkTheme;
 
 const initialLogin = {
-    token: 'asdf',
+    token: null,
     username: '',
     email: '',
     password: '',
@@ -170,7 +181,7 @@ return (
     {data.token !== null ?
         <Drawer.Navigator drawerContent = {props => <MainDrawer {...props} />} >
             <Drawer.Screen name = 'HomeDrawer' component = {MainTab} />
-            <Drawer.Screen name = 'EditProfile' component = {EditProfile} />
+            <Drawer.Screen name = 'EditProfile' component = {EditStackScreen} />
         </Drawer.Navigator>
         :
         <RootScreen />
@@ -181,11 +192,35 @@ return (
   );
 }
 
+{/* The following code for creating a stack for the Edit Profile page is necessary to make the bottom sheet work.
+For some reason, it doesn't work the screen is handled with the drawer navigator. */}
+const EditStack = createStackNavigator();
+
+const EditStackScreen = ({navigation}) =>{
+const {colors} = useNavTheme();
+return(
+    <EditStack.Navigator>
+        <EditStack.Screen name = 'EditProfile' component = {EditProfile} options = {{ title: "Edit Profile",
+        headerLeft: ()=> <Icon.Button
+            name = 'ios-menu'
+            color = {colors.editBurger}
+            size = {25}
+            onPress = {() => navigation.openDrawer()}
+            style = {[styles.iosMenu, {backgroundColor: colors.editBurgerBackground}]}/>
+        }} />
+    </EditStack.Navigator>
+    )
+}
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  iosMenu:{
+    paddingLeft: 10,
+    backgroundColor: '#fff',
   },
 });
