@@ -1,13 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useMemo, useEffect } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, ActivityIndicator } from 'react-native';
 import {NavigationContainer, DefaultTheme as NavDefaultTheme, DarkTheme as NavDarkTheme, useTheme as useNavTheme} from '@react-navigation/native';
 import {createDrawerNavigator, openDrawer} from '@react-navigation/drawer';
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { DarkTheme as PaperDarkTheme, DefaultTheme as PaperDefaultTheme, Provider as PaperProvider} from 'react-native-paper';
 import {createStackNavigator} from '@react-navigation/stack';
 import Icon from 'react-native-vector-icons/Ionicons';
-
 
 import Home from './screens/HomeScreen.js';
 import About from './screens/AboutScreen.js';
@@ -21,6 +20,7 @@ import RootScreen from './screens/RootNonMemberScreen.js';
 import {generateToken} from './screens/TokenGenerator.js';
 import {AuthContext} from './component/AuthContext.js';
 import EditProfile from './screens/EditProfile.js';
+import Loading from './screens/loadingscreen.js';
 
 const Drawer = createDrawerNavigator();
 
@@ -34,6 +34,9 @@ const CustomDefaultTheme = {
        ...PaperDefaultTheme.colors,
        homeTab: '#33DDFF',
        homeIconBackground: '#33DDFF',
+       aboutIconBackground: '#33FF58',
+       profileIconBackground: '#A8FF33',
+       exploreIconBackground: '#FF8333',
        drawerText: '#000',
        backgroundColor: '#23B525',
        linearButton: ['#23B525','#1B861D'],
@@ -49,6 +52,7 @@ const CustomDefaultTheme = {
        editBurger: '#000',
        editBurgerBackground: '#fff',
        subtitle: '#9B9B9B',
+
     },
 }
 
@@ -65,6 +69,9 @@ const CustomDarkTheme = {
         iconInactive: 'ABABAB',
         stackBarColor: '#333',
         homeIconBackground: '#333',
+        aboutIconBackground: '#333',
+        profileIconBackground: '#333',
+        exploreIconBackground: '#333',
         drawerBackgroundcolor: '#fff',
         drawerText: '#000',
         backgroundColor: '#333',
@@ -84,7 +91,7 @@ const CustomDarkTheme = {
        subtitle: '#fff',
     },
 }
-
+const [isLoading, setLoading] = React.useState(true);
 const [theme, setTheme] = React.useState(true);
 let currentTheme = theme ? CustomDefaultTheme : CustomDarkTheme;
 
@@ -168,15 +175,20 @@ useEffect(()=>{
         } catch(e){
             alert(e);
         }
-        if(userToken !== null)
+        if(userToken !== null){
             setData({type: 'RETRIEVE', token: userToken,})
-    }, 1000)
+            }
+        setLoading(false);
+    }, 2000)
 
 },[])
 
 return (
 <PaperProvider theme = {currentTheme}>
 <AuthContext.Provider value = {context}>
+    { isLoading ?
+    <Loading />
+         :
     <NavigationContainer theme = {currentTheme}>
     {data.token !== null ?
         <Drawer.Navigator drawerContent = {props => <MainDrawer {...props} />} >
@@ -187,8 +199,11 @@ return (
         <RootScreen />
     }
     </NavigationContainer>
+
+    }
 </AuthContext.Provider>
 </PaperProvider>
+
   );
 }
 

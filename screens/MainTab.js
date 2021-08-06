@@ -168,6 +168,14 @@ return(
 )
 }
 
+{/*
+Note: Notice how I have to use different methods for determining the background colors for header and the burger menu.
+I couldn't use the same method of using a function like HomeBarColor() for the background of the burger menu.
+When I did do it, it created a bug where once after the user presses the burger menu, the background color of the menu changes to black permanently.
+I have to create properties homeIconBackground, aboutIconBackground, etc in the customDefaultTheme and CustomDarkTheme objects
+in the App.js file for the background colors of the menu button for each of the stacks.
+*/}
+
 export const HomeStackScreen = ({navigation}) => {
 const { colors } = useTheme();
 return(
@@ -185,20 +193,23 @@ return(
 }
 
 export const AboutStackScreen = ({navigation}) => {
+    const {colors} = useTheme();
 return(
+
     <AboutStack.Navigator screenOptions = {{
         headerStyle: {backgroundColor: AboutBarColor(),},
         headerTintColor: '#fff',
     }}>
         <AboutStack.Screen name = 'About' component = {About} options = {{
         title: "About Us",
-        headerLeft: ()=> <Icon.Button name = 'ios-menu' backgroundColor = {AboutBarColor} color = '#fff' size = {25}  style = {{paddingLeft: 20,}} onPress = {() => navigation.openDrawer()} />,
+        headerLeft: ()=> <Icon.Button name = 'ios-menu' backgroundColor = {colors.aboutIconBackground} color = '#fff' size = {25}  style = {{paddingLeft: 20,}} onPress = {() => navigation.openDrawer()} />,
         }}/>
     </AboutStack.Navigator>
     )
 }
 
  export const ProfileStackScreen = ({navigation}) => {
+     const {colors} = useTheme();
 return(
     <ProfileStack.Navigator screenOptions = {{
         headerStyle: {backgroundColor: ProfileBarColor(),},
@@ -206,13 +217,14 @@ return(
     }}>
         <ProfileStack.Screen name = 'Profile' component = {Profile} options = {{
         title: "Profile",
-        headerLeft: ()=> <Icon.Button name = 'ios-menu' backgroundColor = {ProfileBarColor} color = '#fff' size = {25}  style = {{paddingLeft: 20,}} onPress = {() => navigation.openDrawer()} />,
+        headerLeft: ()=> <Icon.Button name = 'ios-menu' backgroundColor = {colors.profileIconBackground} color = '#fff' size = {25}  style = {{paddingLeft: 20,}} onPress = {() => navigation.openDrawer()} />,
         }}/>
     </ProfileStack.Navigator>
     )
 }
 
 export const ExploreStackScreen = ({navigation}) => {
+    const {colors} = useTheme();
 return(
     <ExploreStack.Navigator screenOptions = {{
         headerStyle: {backgroundColor: ExploreBarColor(),},
@@ -220,7 +232,7 @@ return(
     }}>
         <ExploreStack.Screen name = 'Explore' component = {Explore} options = {{
         title: "Explore",
-        headerLeft: ()=> <Icon.Button name = 'ios-menu' backgroundColor = {ExploreBarColor} color = '#fff' size = {25}  style = {{paddingLeft: 20,}} onPress = {() => navigation.openDrawer()} />,
+        headerLeft: ()=> <Icon.Button name = 'ios-menu' backgroundColor = {colors.exploreIconBackground} color = '#fff' size = {25}  style = {{paddingLeft: 20,}} onPress = {() => navigation.openDrawer()} />,
         }}/>
     </ExploreStack.Navigator>
     )
